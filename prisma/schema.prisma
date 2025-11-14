@@ -8,3 +8,92 @@ datasource db {
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
+
+// Admin users who can review submissions
+model User {
+  id        String   @id @default(uuid()) @db.Uuid
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+// Artists who submit demos
+model Artist {
+  id          String       @id @default(uuid()) @db.Uuid
+  name        String
+  email       String       @unique
+  phone       String?
+  instagram   String?
+  soundcloud  String?
+  spotify     String?
+  bio         String?      @db.Text
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  submissions Submission[]
+
+  @@map("artists")
+}
+
+// Demo submissions from artists
+model Submission {
+  id           String           @id @default(uuid()) @db.Uuid
+  artistId     String           @db.Uuid
+  artist       Artist           @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  status       SubmissionStatus @default(PENDING)
+  submittedAt  DateTime         @default(now())
+  reviewedAt   DateTime?
+  grade        Int?             // 1-10 scale
+  internalNotes String?         @db.Text
+  feedback     String?          @db.Text
+  tracks       Track[]
+  
+  @@map("submissions")
+  @@index([artistId])
+  @@index([status])
+  @@index([submittedAt])
+}
+
+enum SubmissionStatus {
+  PENDING
+  IN_REVIEW
+  APPROVED
+  REJECTED
+}
+
+// Individual tracks within a submission
+model Track {
+  id           String     @id @default(uuid()) @db.Uuid
+  submissionId String     @db.Uuid
+  submission   Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  title        String
+  genre        String?
+  bpm          Int?
+  key          String?
+  description  String?    @db.Text
+  fileUrl      String     // Cloudinary URL
+  publicId     String     // Cloudinary public ID for management (required for deletion)
+  fileType     String     // e.g., "audio/mpeg", "audio/wav"
+  fileSize     Int        // Size in bytes
+  duration     Float?     // Duration in seconds
+  createdAt    DateTime   @default(now())
+  
+  @@map("tracks")
+  @@index([submissionId])
+}
+
+// Email templates for automated communications
+model EmailTemplate {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String   @unique // e.g., "submission_confirmation", "approval", "rejection"
+  subject     String
+  htmlContent String   @db.Text
+  variables   String[] // Available variables like ["artist_name", "submission_id"]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("email_templates")
+}
