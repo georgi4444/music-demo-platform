@@ -1,11 +1,7 @@
-import * as bcrypt from "bcrypt";
 import { PrismaClient } from "@/lib/generated/prisma/client";
+import { hashPassword } from "@/lib/password";
 
 const prisma = new PrismaClient();
-
-async function hashPassword(password: string): Promise<string> {
-  return bcrypt.hash(password, 12);
-}
 
 async function main() {
   console.log("Starting database seed...");
