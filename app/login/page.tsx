@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react";
 import { Suspense, useState } from "react";
 import { useForm } from "react-hook-form";
 import { LoadingSpinner } from "@/components/loading-spinner";
-import { Alert } from "@/components/ui/alert";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -75,7 +75,11 @@ function LoginForm() {
         </CardHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
           <CardContent className="space-y-6">
-            {error && <Alert variant="destructive">{error}</Alert>}
+            {error && (
+              <Alert variant="destructive">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
 
             <div className="space-y-2">
               <Label htmlFor="email" className="text-sm font-semibold">

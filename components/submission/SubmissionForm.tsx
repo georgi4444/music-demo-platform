@@ -8,7 +8,7 @@ import { useSubmission } from "@/components/submission/hooks/use-submission";
 import { useTrackUploads } from "@/components/submission/hooks/use-track-uploads";
 import { SubmissionSuccess } from "@/components/submission/SubmissionSuccess";
 import { TrackUploadsSection } from "@/components/submission/TrackUploadsSection";
-import { Alert } from "@/components/ui/alert";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
   type ArtistInfoInput,
@@ -77,7 +77,7 @@ export function SubmissionForm() {
       {submitError && (
         <Alert variant="destructive">
           <AlertCircle className="h-4 w-4" />
-          <p>{submitError}</p>
+          <AlertDescription>{submitError}</AlertDescription>
         </Alert>
       )}
 

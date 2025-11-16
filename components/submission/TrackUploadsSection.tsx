@@ -4,7 +4,7 @@ import { AlertCircle, Loader2 } from "lucide-react";
 import type { CloudinaryUploadWidgetResults } from "next-cloudinary";
 import { TrackUploadCard } from "@/components/submission/TrackUploadCard";
 import { UploadWidget } from "@/components/submission/UploadWidget";
-import { Alert } from "@/components/ui/alert";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card } from "@/components/ui/card";
 import { UPLOAD_CONFIG } from "@/lib/cloudinary-config";
 import type { CloudinaryFileAdded } from "@/types/cloudinary";
@@ -47,7 +47,7 @@ export function TrackUploadsSection({
         {uploadError && (
           <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />
-            <p>{uploadError}</p>
+            <AlertDescription>{uploadError}</AlertDescription>
           </Alert>
         )}
 
