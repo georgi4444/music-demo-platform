@@ -74,7 +74,8 @@ model Track {
   bpm          Int?
   key          String?
   description  String?    @db.Text
-  fileUrl      String     // Cloudinary URL
+  fileUrl      String     // Cloudinary URL (original file)
+  streamUrl    String?    // Cloudinary URL for MP3 version (from eager transform)
   publicId     String     // Cloudinary public ID for management (required for deletion)
   fileType     String     // e.g., "audio/mpeg", "audio/wav"
   fileSize     Int        // Size in bytes
