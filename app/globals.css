@@ -52,6 +52,16 @@
   --color-input: #1f1f1f;
   --color-ring: #8b5cf6;
 
+  /* Sidebar (for admin dashboard) */
+  --color-sidebar: #161616;
+  --color-sidebar-foreground: #ffffff;
+  --color-sidebar-primary: #8b5cf6;
+  --color-sidebar-primary-foreground: #ffffff;
+  --color-sidebar-accent: #1f1f1f;
+  --color-sidebar-accent-foreground: #ffffff;
+  --color-sidebar-border: #27272a;
+  --color-sidebar-ring: #8b5cf6;
+
   /* Border Radius */
   --radius-card: 0.75rem; /* 12px */
   --radius-button: 0.5rem; /* 8px */
@@ -105,6 +115,16 @@
   --destructive-foreground: #ffffff;
   --input: #1f1f1f;
   --ring: #8b5cf6;
+
+  /* Sidebar (for admin dashboard) */
+  --sidebar: #161616;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #8b5cf6;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1f1f1f;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #27272a;
+  --sidebar-ring: #8b5cf6;
 
   /* Border radius */
   --radius: 0.5rem;

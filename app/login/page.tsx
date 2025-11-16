@@ -75,31 +75,21 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4 sm:px-6 lg:px-8">
-      <Card className="w-full max-w-md border-border bg-surface shadow-2xl transition-all duration-150 ease-in-out hover:border-border-emphasis hover:shadow-lg">
+      <Card className="w-full max-w-md shadow-2xl transition-all duration-150 ease-in-out hover:shadow-lg">
         <CardHeader className="space-y-3">
-          <CardTitle className="text-2xl font-bold leading-tight tracking-tight text-text-primary">
+          <CardTitle className="text-2xl font-bold leading-tight tracking-tight">
             Welcome back
           </CardTitle>
-          <CardDescription className="text-base text-text-secondary">
+          <CardDescription className="text-base">
             Enter your credentials to access your account
           </CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit(onSubmit)}>
           <CardContent className="space-y-6">
-            {error && (
-              <Alert
-                variant="destructive"
-                className="border-error/20 bg-error/10 text-error"
-              >
-                {error}
-              </Alert>
-            )}
+            {error && <Alert variant="destructive">{error}</Alert>}
 
             <div className="space-y-2">
-              <Label
-                htmlFor="email"
-                className="text-sm font-semibold text-text-primary"
-              >
+              <Label htmlFor="email" className="text-sm font-semibold">
                 Email
               </Label>
               <Input
@@ -109,31 +99,21 @@ export default function LoginPage() {
                 autoComplete="email"
                 disabled={isLoading}
                 {...register("email")}
-                className={`
-                  h-12 rounded-button border-border bg-surface-elevated 
-                  px-4 text-text-primary placeholder:text-text-muted
-                  transition-all duration-150 ease
-                  focus:border-primary focus:ring-2 focus:ring-primary/20
-                  disabled:cursor-not-allowed disabled:opacity-50
-                  ${
-                    errors.email
-                      ? "border-error focus:border-error focus:ring-error/20"
-                      : ""
-                  }
-                `}
+                className={`h-12 ${
+                  errors.email
+                    ? "border-destructive focus:ring-destructive/20"
+                    : ""
+                }`}
               />
               {errors.email && (
-                <p className="text-sm font-medium text-error">
+                <p className="text-sm font-medium text-destructive">
                   {errors.email.message}
                 </p>
               )}
             </div>
 
             <div className="space-y-2">
-              <Label
-                htmlFor="password"
-                className="text-sm font-semibold text-text-primary"
-              >
+              <Label htmlFor="password" className="text-sm font-semibold">
                 Password
               </Label>
               <Input
@@ -143,32 +123,21 @@ export default function LoginPage() {
                 autoComplete="current-password"
                 disabled={isLoading}
                 {...register("password")}
-                className={`
-                  h-12 rounded-button border-border bg-surface-elevated 
-                  px-4 text-text-primary placeholder:text-text-muted
-                  transition-all duration-150 ease
-                  focus:border-primary focus:ring-2 focus:ring-primary/20
-                  disabled:cursor-not-allowed disabled:opacity-50
-                  ${
-                    errors.password
-                      ? "border-error focus:border-error focus:ring-error/20"
-                      : ""
-                  }
-                `}
+                className={`h-12 ${
+                  errors.password
+                    ? "border-destructive focus:ring-destructive/20"
+                    : ""
+                }`}
               />
               {errors.password && (
-                <p className="text-sm font-medium text-error">
+                <p className="text-sm font-medium text-destructive">
                   {errors.password.message}
                 </p>
               )}
             </div>
           </CardContent>
           <CardFooter className="pt-2">
-            <Button
-              type="submit"
-              className="w-full h-12 rounded-button bg-primary font-semibold text-primary-foreground transition-all duration-150 ease-in-out hover:bg-primary-hover hover:scale-[1.02] disabled:opacity-50 disabled:hover:scale-100"
-              disabled={isLoading}
-            >
+            <Button type="submit" className="w-full h-12" disabled={isLoading}>
               {isLoading ? (
                 <span className="flex items-center gap-2">
                   <LoadingSpinner />
