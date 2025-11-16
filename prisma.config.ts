@@ -1,12 +1,7 @@
 import { config } from "dotenv";
 import { defineConfig, env } from "prisma/config";
 
-// Only load .env.local in development (Vercel uses its own env vars)
-if (process.env.NODE_ENV !== "production") {
-  config({ path: ".env.local" });
-} else {
-  config();
-}
+config({ path: ".env.local" });
 
 export default defineConfig({
   schema: "prisma/schema.prisma",

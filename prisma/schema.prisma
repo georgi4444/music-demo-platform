@@ -1,6 +1,7 @@
 generator client {
   provider = "prisma-client"
   output   = "../lib/generated/prisma"
+  engineType      = "client" // enable Prisma ORM without Rust (so it works on Vercel Edge)
 }
 
 datasource db {
