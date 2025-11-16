@@ -1,6 +1,17 @@
 import sgMail from "@sendgrid/mail";
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
+const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY;
+const SENDGRID_VERIFIED_SENDER = process.env.SENDGRID_VERIFIED_SENDER;
+
+if (!SENDGRID_API_KEY) {
+  throw new Error("SENDGRID_API_KEY environment variable is not set");
+}
+
+if (!SENDGRID_VERIFIED_SENDER) {
+  throw new Error("SENDGRID_VERIFIED_SENDER environment variable is not set");
+}
+
+sgMail.setApiKey(SENDGRID_API_KEY);
 
 interface SubmissionEmailData {
   id: string;
@@ -18,7 +29,7 @@ export async function sendSubmissionConfirmationEmail(
 ) {
   // Use verified sender email from environment variable
   // In production, you should verify your domain with SendGrid
-  const fromEmail = process.env.SENDGRID_VERIFIED_SENDER;
+  const fromEmail = SENDGRID_VERIFIED_SENDER as string;
 
   const msg = {
     to: submission.artist.email,
