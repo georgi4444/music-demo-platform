@@ -10,7 +10,8 @@
     "format": "biome format --write",
     "db:migrate": "prisma migrate dev",
     "db:generate": "prisma generate",
-    "db:seed": "prisma db seed"
+    "db:seed": "prisma db seed",
+    "create:upload-preset": "tsx cloudinary/createUploadPreset.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
