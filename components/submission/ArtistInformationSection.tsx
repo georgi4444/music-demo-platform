@@ -12,7 +12,7 @@ interface FieldErrorProps {
 
 function FieldError({ error }: FieldErrorProps) {
   if (!error?.message) return null;
-  return <p className="text-sm text-destructive mt-1">{error.message}</p>;
+  return <p className="text-sm text-destructive">{error.message}</p>;
 }
 
 interface ArtistInformationSectionProps {
@@ -29,7 +29,7 @@ export function ArtistInformationSection({
       <h2 className="text-xl font-semibold mb-4">Artist Information</h2>
       <div className="grid gap-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
+          <div className="space-y-2">
             <Label htmlFor="name">
               Name <span className="text-destructive">*</span>
             </Label>
@@ -37,7 +37,7 @@ export function ArtistInformationSection({
             <FieldError error={errors.name} />
           </div>
 
-          <div>
+          <div className="space-y-2">
             <Label htmlFor="email">
               Email <span className="text-destructive">*</span>
             </Label>
@@ -51,7 +51,7 @@ export function ArtistInformationSection({
           </div>
         </div>
 
-        <div>
+        <div className="space-y-2">
           <Label htmlFor="phone">Phone</Label>
           <Input
             id="phone"
@@ -64,7 +64,7 @@ export function ArtistInformationSection({
         <div className="space-y-2">
           <Label className="text-base">Social Media Links</Label>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            <div>
+            <div className="space-y-2">
               <Label htmlFor="instagram" className="text-sm font-normal">
                 Instagram
               </Label>
@@ -75,7 +75,7 @@ export function ArtistInformationSection({
               />
               <FieldError error={errors.instagram} />
             </div>
-            <div>
+            <div className="space-y-2">
               <Label htmlFor="soundcloud" className="text-sm font-normal">
                 SoundCloud
               </Label>
@@ -86,7 +86,7 @@ export function ArtistInformationSection({
               />
               <FieldError error={errors.soundcloud} />
             </div>
-            <div>
+            <div className="space-y-2">
               <Label htmlFor="spotify" className="text-sm font-normal">
                 Spotify
               </Label>
@@ -100,7 +100,7 @@ export function ArtistInformationSection({
           </div>
         </div>
 
-        <div>
+        <div className="space-y-2">
           <Label htmlFor="bio">Bio</Label>
           <textarea
             id="bio"

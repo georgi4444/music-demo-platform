@@ -79,7 +79,7 @@ export function TrackUploadCard({
 
         {/* Track Metadata Form */}
         <div className="grid gap-3 pt-2 border-t">
-          <div>
+          <div className="space-y-2">
             <Label htmlFor={`track-${index}-title`}>
               Track Title <span className="text-red-500">*</span>
             </Label>
@@ -98,7 +98,7 @@ export function TrackUploadCard({
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <div>
+            <div className="space-y-2">
               <Label htmlFor={`track-${index}-genre`}>Genre</Label>
               <Input
                 id={`track-${index}-genre`}
@@ -108,7 +108,7 @@ export function TrackUploadCard({
                 disabled={disabled}
               />
             </div>
-            <div>
+            <div className="space-y-2">
               <Label htmlFor={`track-${index}-bpm`}>BPM</Label>
               <Input
                 id={`track-${index}-bpm`}
@@ -127,7 +127,7 @@ export function TrackUploadCard({
             </div>
           </div>
 
-          <div>
+          <div className="space-y-2">
             <Label htmlFor={`track-${index}-key`}>Key</Label>
             <Input
               id={`track-${index}-key`}
@@ -138,7 +138,7 @@ export function TrackUploadCard({
             />
           </div>
 
-          <div>
+          <div className="space-y-2">
             <Label htmlFor={`track-${index}-description`}>Description</Label>
             <Input
               id={`track-${index}-description`}
