@@ -35,7 +35,7 @@ export function useSubmission({ tracks, isUploading }: UseSubmissionProps) {
           tracks: serializeTracks(tracks),
         });
 
-        const response = await fetch("/api/submit", {
+        const response = await fetch("/api/submissions", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(validatedData),
