@@ -1,4 +1,13 @@
-export default function SubmissionsPage() {
+import { SubmissionsTableContainer } from "@/features/admin/components/SubmissionsTableContainer";
+import { getSubmissionsList } from "@/features/admin/services/submissions-service";
+
+export default async function SubmissionsPage() {
+  // Fetch initial submissions data using the service
+  const response = await getSubmissionsList({
+    page: 1,
+    pageSize: 10,
+  });
+
   return (
     <div className="space-y-6">
       <div>
@@ -7,11 +16,11 @@ export default function SubmissionsPage() {
           Review and manage artist demo submissions
         </p>
       </div>
-      <div className="flex min-h-[400px] items-center justify-center rounded-lg border border-dashed">
-        <div className="text-center">
-          <p className="text-lg text-muted-foreground">Coming soon...</p>
-        </div>
-      </div>
+
+      <SubmissionsTableContainer
+        initialData={response.data}
+        initialPagination={response.pagination}
+      />
     </div>
   );
 }
