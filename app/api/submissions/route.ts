@@ -1,10 +1,59 @@
 import { NextResponse } from "next/server";
-import type { CreateSubmissionResponse } from "@/app/api/submissions/types";
+import type {
+  CreateSubmissionResponse,
+  SubmissionListParams,
+} from "@/app/api/submissions/types";
+import { getSubmissionsList } from "@/features/admin/services/submissions-service";
+import { requireAuth } from "@/lib/auth/session";
 import { confirmTrackUploads } from "@/lib/cloudinary/client";
 import { sendSubmissionConfirmationEmail } from "@/lib/email/client";
+import type { SubmissionStatus } from "@/lib/generated/prisma/client";
 import prisma from "@/lib/prisma";
 import { triggerNewSubmission } from "@/lib/pusher/server";
 import { submissionSchema } from "@/lib/validations/submission";
+
+/**
+ * GET /api/submissions
+ * List all submissions with filtering, searching, sorting, and pagination
+ * Admin only - requires authentication
+ */
+export async function GET(request: Request) {
+  try {
+    // Require authentication for admin access
+    await requireAuth();
+
+    const { searchParams } = new URL(request.url);
+
+    // Parse query parameters
+    const params: SubmissionListParams = {
+      page: Number.parseInt(searchParams.get("page") || "1", 10),
+      pageSize: Number.parseInt(searchParams.get("pageSize") || "10", 10),
+      status: searchParams.get("status") as SubmissionStatus | undefined,
+      artistName: searchParams.get("artistName") || undefined,
+      genre: searchParams.get("genre") || undefined,
+      fromDate: searchParams.get("fromDate") || undefined,
+      toDate: searchParams.get("toDate") || undefined,
+      search: searchParams.get("search") || undefined,
+      sortBy: (searchParams.get("sortBy") || "submittedAt") as
+        | "submittedAt"
+        | "status"
+        | "artistName",
+      sortOrder: (searchParams.get("sortOrder") || "desc") as "asc" | "desc",
+    };
+
+    // Use service to get submissions
+    const response = await getSubmissionsList(params);
+
+    return NextResponse.json(response);
+  } catch (error) {
+    console.error("Get submissions error:", error);
+
+    return NextResponse.json(
+      { error: "Failed to fetch submissions" },
+      { status: 500 },
+    );
+  }
+}
 
 export async function POST(request: Request) {
   try {
