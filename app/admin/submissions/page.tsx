@@ -1,10 +1,10 @@
-export default function DashboardPage() {
+export default function SubmissionsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+        <h1 className="text-3xl font-bold tracking-tight">Submissions</h1>
         <p className="text-muted-foreground">
-          Overview of submissions and activity
+          Review and manage artist demo submissions
         </p>
       </div>
       <div className="flex min-h-[400px] items-center justify-center rounded-lg border border-dashed">
