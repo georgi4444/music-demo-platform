@@ -1,11 +1,12 @@
 import { useState, useTransition } from "react";
 import { z } from "zod";
-import { serializeTracks } from "@/components/submission/utils/serialization";
+import { createSubmission } from "@/features/submissions/api/client";
+import type { UploadedTrack } from "@/features/submissions/types";
+import { serializeTracks } from "@/features/submissions/utils/serialization";
 import {
   type ArtistInfoInput,
   submissionSchema,
 } from "@/lib/validations/submission";
-import type { UploadedTrack } from "@/types/submission";
 
 interface UseSubmissionProps {
   tracks: UploadedTrack[];
@@ -35,18 +36,8 @@ export function useSubmission({ tracks, isUploading }: UseSubmissionProps) {
           tracks: serializeTracks(tracks),
         });
 
-        const response = await fetch("/api/submissions", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(validatedData),
-        });
-
-        if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error.error || "Submission failed");
-        }
-
-        const data = await response.json();
+        // Use the API client instead of direct fetch
+        await createSubmission(validatedData);
         setSubmitSuccess(true);
       } catch (error) {
         console.error("Submission error:", error);

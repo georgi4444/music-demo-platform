@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import type { UploadedTrack } from "@/types/submission";
+import type { UploadedTrack } from "@/features/submissions/types";
 
 interface TrackUploadCardProps {
   track: UploadedTrack;

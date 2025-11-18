@@ -1,6 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 import { config } from "dotenv";
-import { UPLOAD_CONFIG } from "@/lib/cloudinary-config";
+import { UPLOAD_CONFIG } from "@/lib/cloudinary/config";
 
 config({ path: ".env.local" });
 

@@ -1,7 +1,8 @@
 /**
- * Cloudinary upload configuration
+ * Cloudinary Upload Configuration
  * This file can be safely imported in client components
  */
+
 export const UPLOAD_CONFIG = {
   presetName: "music_demo",
   allowedFormats: ["mp3", "wav", "flac", "m4a"] as const,
@@ -11,3 +12,5 @@ export const UPLOAD_CONFIG = {
   tag: "temp",
   resourceType: "video", // Cloudinary stores audio as 'video' type
 } as const;
+
+export type AllowedAudioFormat = (typeof UPLOAD_CONFIG.allowedFormats)[number];

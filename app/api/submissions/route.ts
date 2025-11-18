@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
-import { confirmTrackUploads } from "@/lib/cloudinary";
-import { sendSubmissionConfirmationEmail } from "@/lib/email";
+import type { CreateSubmissionResponse } from "@/app/api/submissions/types";
+import { confirmTrackUploads } from "@/lib/cloudinary/client";
+import { sendSubmissionConfirmationEmail } from "@/lib/email/client";
 import prisma from "@/lib/prisma";
 import { submissionSchema } from "@/lib/validations/submission";
 
@@ -75,7 +76,7 @@ export async function POST(request: Request) {
       console.error("Email send failed (non-blocking):", error);
     });
 
-    return NextResponse.json({
+    return NextResponse.json<CreateSubmissionResponse>({
       success: true,
       submissionId: submission.id,
       message: "Submission received successfully",

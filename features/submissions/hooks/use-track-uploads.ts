@@ -1,10 +1,10 @@
 import type { CloudinaryUploadWidgetResults } from "next-cloudinary";
 import { useState } from "react";
+import type { UploadedTrack } from "@/features/submissions/types";
 import type {
   CloudinaryFileAdded,
   CloudinaryUploadResult,
 } from "@/types/cloudinary";
-import type { UploadedTrack } from "@/types/submission";
 
 /**
  * Hook for managing track uploads with Cloudinary

@@ -1,3 +1,8 @@
+/**
+ * Password Hashing & Verification
+ * Uses bcrypt for secure password handling
+ */
+
 import * as bcrypt from "bcrypt";
 
 const SALT_ROUNDS = 12;

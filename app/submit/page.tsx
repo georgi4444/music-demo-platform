@@ -1,4 +1,4 @@
-import { SubmissionForm } from "@/components/submission/SubmissionForm";
+import { SubmissionForm } from "@/features/submissions/components/SubmissionForm";
 
 export default function SubmitPage() {
   return (

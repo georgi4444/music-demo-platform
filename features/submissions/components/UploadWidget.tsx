@@ -4,7 +4,7 @@ import { Upload } from "lucide-react";
 import type { CloudinaryUploadWidgetResults } from "next-cloudinary";
 import { CldUploadWidget } from "next-cloudinary";
 import { Button } from "@/components/ui/button";
-import { UPLOAD_CONFIG } from "@/lib/cloudinary-config";
+import { UPLOAD_CONFIG } from "@/lib/cloudinary/config";
 import type { CloudinaryFileAdded } from "@/types/cloudinary";
 
 interface UploadWidgetProps {

@@ -1,4 +1,4 @@
-import { hashPassword } from "@/lib/password";
+import { hashPassword } from "@/lib/auth/password";
 import prisma from "@/lib/prisma";
 
 async function main() {

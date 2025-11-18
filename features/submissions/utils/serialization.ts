@@ -1,4 +1,4 @@
-import type { UploadedTrack } from "@/types/submission";
+import type { UploadedTrack } from "@/features/submissions/types";
 
 /**
  * Serializes track data for API submission

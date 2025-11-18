@@ -2,13 +2,13 @@
 
 import { AlertCircle, Loader2 } from "lucide-react";
 import type { CloudinaryUploadWidgetResults } from "next-cloudinary";
-import { TrackUploadCard } from "@/components/submission/TrackUploadCard";
-import { UploadWidget } from "@/components/submission/UploadWidget";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card } from "@/components/ui/card";
-import { UPLOAD_CONFIG } from "@/lib/cloudinary-config";
+import { TrackUploadCard } from "@/features/submissions/components/TrackUploadCard";
+import { UploadWidget } from "@/features/submissions/components/UploadWidget";
+import type { UploadedTrack } from "@/features/submissions/types";
+import { UPLOAD_CONFIG } from "@/lib/cloudinary/config";
 import type { CloudinaryFileAdded } from "@/types/cloudinary";
-import type { UploadedTrack } from "@/types/submission";
 
 interface TrackUploadsSectionProps {
   tracks: UploadedTrack[];

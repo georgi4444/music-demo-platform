@@ -1,6 +1,12 @@
-import { v2 as cloudinary } from "cloudinary";
-import { UPLOAD_CONFIG } from "@/lib//cloudinary-config";
+/**
+ * Cloudinary Client & Operations
+ * Server-side Cloudinary operations (requires API secret)
+ */
 
+import { v2 as cloudinary } from "cloudinary";
+import { UPLOAD_CONFIG } from "@/lib/cloudinary/config";
+
+// Configure Cloudinary client
 cloudinary.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
   api_key: process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY,

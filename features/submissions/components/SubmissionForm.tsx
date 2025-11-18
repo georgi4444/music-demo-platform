@@ -3,13 +3,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AlertCircle, Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { ArtistInformationSection } from "@/components/submission/ArtistInformationSection";
-import { useSubmission } from "@/components/submission/hooks/use-submission";
-import { useTrackUploads } from "@/components/submission/hooks/use-track-uploads";
-import { SubmissionSuccess } from "@/components/submission/SubmissionSuccess";
-import { TrackUploadsSection } from "@/components/submission/TrackUploadsSection";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import { ArtistInformationSection } from "@/features/submissions/components/ArtistInformationSection";
+import { SubmissionSuccess } from "@/features/submissions/components/SubmissionSuccess";
+import { TrackUploadsSection } from "@/features/submissions/components/TrackUploadsSection";
+import { useSubmission } from "@/features/submissions/hooks/use-submission";
+import { useTrackUploads } from "@/features/submissions/hooks/use-track-uploads";
 import {
   type ArtistInfoInput,
   artistInfoSchema,

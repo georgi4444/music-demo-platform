@@ -1,8 +1,11 @@
 /**
- * Submission domain types
- * Types related to music demo submissions and track uploads
+ * Submissions Feature Types
+ * UI and domain types specific to the submissions feature
  */
 
+/**
+ * Track upload data (client-side)
+ */
 export interface UploadedTrack {
   // Cloudinary data
   publicId: string;
