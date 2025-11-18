@@ -18,6 +18,7 @@ model User {
   name      String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  reviews   Review[]
 
   @@map("users")
 }
@@ -41,21 +42,17 @@ model Artist {
 
 // Demo submissions from artists
 model Submission {
-  id           String           @id @default(uuid()) @db.Uuid
-  artistId     String           @db.Uuid
-  artist       Artist           @relation(fields: [artistId], references: [id], onDelete: Cascade)
-  status       SubmissionStatus @default(PENDING)
-  submittedAt  DateTime         @default(now())
-  reviewedAt   DateTime?
-  grade        Int?             // 1-10 scale
-  internalNotes String?         @db.Text
-  feedback     String?          @db.Text
-  tracks       Track[]
+  id          String           @id @default(uuid()) @db.Uuid
+  artistId    String           @db.Uuid
+  artist      Artist           @relation(fields: [artistId], references: [id], onDelete: Cascade)
+  status      SubmissionStatus @default(PENDING)
+  submittedAt DateTime         @default(now())
+  tracks      Track[]
+  reviews     Review[]
   
   @@map("submissions")
   @@index([artistId])
   @@index([status])
-  @@index([submittedAt])
 }
 
 enum SubmissionStatus {
@@ -63,6 +60,23 @@ enum SubmissionStatus {
   IN_REVIEW
   APPROVED
   REJECTED
+}
+
+// Reviews by admin users on submissions
+model Review {
+  id            String   @id @default(uuid()) @db.Uuid
+  submissionId  String   @db.Uuid
+  submission    Submission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+  reviewerId    String   @db.Uuid
+  reviewer      User     @relation(fields: [reviewerId], references: [id], onDelete: Cascade)
+  grade         Int?     // 1-10 scale
+  internalNotes String?  @db.Text
+  feedback      String?  @db.Text // Feedback to be shared with artist
+  reviewedAt    DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@map("reviews")
+  @@index([submissionId])
 }
 
 // Individual tracks within a submission
