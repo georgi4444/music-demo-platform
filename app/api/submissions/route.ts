@@ -3,6 +3,7 @@ import type { CreateSubmissionResponse } from "@/app/api/submissions/types";
 import { confirmTrackUploads } from "@/lib/cloudinary/client";
 import { sendSubmissionConfirmationEmail } from "@/lib/email/client";
 import prisma from "@/lib/prisma";
+import { triggerNewSubmission } from "@/lib/pusher/server";
 import { submissionSchema } from "@/lib/validations/submission";
 
 export async function POST(request: Request) {
@@ -74,6 +75,11 @@ export async function POST(request: Request) {
     // Send confirmation email (don't await - let it happen async)
     sendSubmissionConfirmationEmail(submission).catch((error) => {
       console.error("Email send failed (non-blocking):", error);
+    });
+
+    // Trigger Pusher event for real-time notification (don't await)
+    triggerNewSubmission(submission.id).catch((error) => {
+      console.error("Pusher event failed (non-blocking):", error);
     });
 
     return NextResponse.json<CreateSubmissionResponse>({
